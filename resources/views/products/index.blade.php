@@ -7,6 +7,9 @@
 
     <h1>List of Products</h1>
 
+    <hr>
+    <a class="btn btn-success" href="{{route('products.create')}}">Create product</a>
+
     {{--Utilizando semantica propia de laravel para verificar si es vacia o no la coleccion--}}
     {{--@if (!empty($products))--}}
     @empty(!$products)
@@ -19,16 +22,27 @@
                     <th>Description</th>
                     <th>stock</th>
                     <th>Status</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
                 <tobdy>
                     @foreach($products as $product)
                         <tr>
                             <td>{{$product->id}}</td>
-                            <td>{{$product->name}}</td>
+                            <td>{{$product->title}}</td>
                             <td>{{\Str::limit($product->description, $limit=30, $end='...')}}</td>
                             <td>{{$product->stock}}</td>
                             <td>{{$product->status}}</td>
+                            <td>
+                                <a class="btn btn-link" href="{{route('products.show', $product->id)}}">Show</a>
+                                <a class="btn btn-link" href="{{route('products.edit', $product->id)}}">Edit</a>
+
+                                <form action="{{route('products.destroy', ['product' =>  $product->id])}}" method="POST">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button type="submit" class="btn btn-link">Delete</button>
+                                </form>
+                            </td>
                         </tr>
                     @endforeach
                 </tobdy>

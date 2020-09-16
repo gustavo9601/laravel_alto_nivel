@@ -20,12 +20,22 @@ class ProductController extends Controller
 
     public function create()
     {
-
+        return view('products.create');
     }
 
-    public function store()
+    public function store(Request $request)
     {
+        /*$product = Product::create([
+           'title' => $request->input('title'),
+           'description' => $request->input('description'),
+           'price' => $request->input('price'),
+           'stock' => $request->input('stock'),
+           'status' => $request->input('status'),
+        ]);*/
+        // pasando el resquest->all() en base a los campos en el modelo $fillable realazara la insercion
+        $product = Product::create($request->all());
 
+        dd($product);
     }
 
     public function show($product)
@@ -42,16 +52,25 @@ class ProductController extends Controller
 
     public function edit($product)
     {
-
+        $product = Product::findOrFail($product);
+        return view('products.edit')->with([
+            'product' => $product
+        ]);
     }
 
-    public function update($product)
+    public function update($productId)
     {
+        $product = Product::findOrFail($productId);
 
+        $product->update(\request()->all());
+
+        return $product;
     }
 
     public function destroy($product)
     {
-
+        $product = Product::findOrFail($product);
+        $product->delete();
+        return $product;
     }
 }
