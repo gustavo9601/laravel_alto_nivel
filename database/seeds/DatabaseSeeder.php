@@ -11,6 +11,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        // Cargando la factoria con el modelo, y creandolos en BD
+        // factory(Modelo, cantidad_A_crear)->create();
+        $products = factory(\App\Product::class, 50)->create();
+        $products = factory(\App\User::class, 10)->create();
+
     }
 }
