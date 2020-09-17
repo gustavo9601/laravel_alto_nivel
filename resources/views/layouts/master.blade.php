@@ -8,7 +8,33 @@
     <title>Ecommerce GM</title>
 </head>
 <body>
-    {{--Nombre al segemento, de como se llamara de otros archivos--}}
-    @yield('content')
+
+{{--Verificando si se recibe desde el controlador la sesion como error--}}
+{{--@if(session()->has('error'))
+    <div class="alert alert-danger">
+        {{session()->get('error')}}
+    </div>
+@endif--}}
+
+@if(session()->has('success'))
+    <div class="alert alert-success">
+        {{session()->get('success')}}
+    </div>
+@endif
+
+{{--Validando la variable global de laravel $errors--}}
+@if (isset($errors) && $errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach($errors->all() as $error)
+                <li>{{$error}}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+
+{{--Nombre al segemento, de como se llamara de otros archivos--}}
+@yield('content')
 </body>
 </html>
