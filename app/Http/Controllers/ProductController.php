@@ -7,6 +7,22 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+
+    public function __construct()
+    {
+        // Todas las acciones o rutas de este controlador estan protegidas pro el middleware
+        $this->middleware('auth');
+
+
+        /*
+         * De esta forma se especifica a que funciones aplique a ciertas funciones
+         * $this->middleware('auth')->only(['index']);
+         *
+         * De esta forma se especifica a que funciones debe exeprtar el midleware
+         * $this->middleware('auth')->except(['index', 'show']);
+        */
+    }
+
     public function index()
     {
 
