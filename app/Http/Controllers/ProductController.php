@@ -131,7 +131,7 @@ class ProductController extends Controller
         // redirect()->back()   // redirige al anterior
         // redirect()->action('NameController@function')   // a una accion puntual
         return redirect()
-            ->route('products.index'
+            ->route('products.index')
             ->with(['success' => "The product with id {$product->id} was deleted"]);
     }
 }

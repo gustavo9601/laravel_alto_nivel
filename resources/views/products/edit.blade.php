@@ -1,5 +1,5 @@
 {{--Especificando el archivo base de estructura--}}
-@extends('layouts.master')
+@extends('layouts.app')
 
 {{--Especificando el nombre de la seccion que sera dinamico--}}
 @section('content')
@@ -48,7 +48,7 @@
                 </option>
             </select>
         </div>
-        <div class="form-row">
+        <div class="form-row mt-3">
             <button type="submit" class="btn btn-primary btn-block">Update product</button>
         </div>
     </form>

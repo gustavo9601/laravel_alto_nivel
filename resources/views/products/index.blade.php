@@ -1,5 +1,5 @@
 {{--Especificando el archivo base de estructura--}}
-@extends('layouts.master')
+@extends('layouts.app')
 
 {{--Especificando el nombre de la seccion que sera dinamico--}}
 @section('content')
@@ -8,7 +8,7 @@
     <h1>List of Products</h1>
 
     <hr>
-    <a class="btn btn-success" href="{{route('products.create')}}">Create product</a>
+    <a class="btn btn-success mb-3" href="{{route('products.create')}}">Create product</a>
 
     {{--Utilizando semantica propia de laravel para verificar si es vacia o no la coleccion--}}
     {{--@if (!empty($products))--}}
@@ -37,7 +37,7 @@
                                 <a class="btn btn-link" href="{{route('products.show', $product->id)}}">Show</a>
                                 <a class="btn btn-link" href="{{route('products.edit', $product->id)}}">Edit</a>
 
-                                <form action="{{route('products.destroy', ['product' =>  $product->id])}}" method="POST">
+                                <form class="d-inline" action="{{route('products.destroy', ['product' =>  $product->id])}}" method="POST">
                                     @method('DELETE')
                                     @csrf
                                     <button type="submit" class="btn btn-link">Delete</button>

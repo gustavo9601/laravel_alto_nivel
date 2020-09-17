@@ -1,5 +1,5 @@
 {{--Especificando el archivo base de estructura--}}
-@extends('layouts.master')
+@extends('layouts.app')
 
 {{--Especificando el nombre de la seccion que sera dinamico--}}
 @section('content')
