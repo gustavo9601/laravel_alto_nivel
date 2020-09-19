@@ -4,8 +4,9 @@
 {{--Especificando el nombre de la seccion que sera dinamico--}}
 @section('content')
 
-    <h1>{{$product->title}}</h1>
-    <p>{{$product->description}}</p>
+    {{--Incluyendo el archivo blade, y automaticamente recive acceso a la variable product--}}
+   {{--@include('components.product-card', ['indice' => 'valor']);  // Se puede pasar parametros manualmente   --}}
+   @include('components.product-card')
     {{-- Comentario blade --}}
 
 @endsection
