@@ -44,4 +44,25 @@ class User extends Authenticatable
         'payed_at'
     ];
 
+    // Un usuario tiene muchas ordenes
+    // le pasamos el nombre de la clave foranea, si no tiene la consistencia de laravel
+    public function orders(){
+        return $this->hasMany(Order::class, 'customer_id');
+    }
+
+
+    // Relacion a travez de otra relacion
+    public function payments(){
+        // Accede a la tabla, a travez de otra
+        // hasManyThrough(Relacion directa con esta clase, Relacion a travez de la otra relacion a acceder, 'indice de relacion que conoce este modelo');
+        return $this->hasManyThrough(Payment::class, Order::class, 'customer_id');
+    }
+
+
+    // Un usuario tiene una imagen
+    // Usamos una relacion polimorfica
+    public function image(){
+        // Modelo polimofico, campo tipo de la relacion
+        return $this->morphOne(Image::class, 'imageable');
+    }
 }

@@ -4,27 +4,23 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePaymentsTable extends Migration
+class CreateOrderProductTable extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
+    // Tabla pivote entre Order y Product
     public function up()
     {
-        Schema::create('payments', function (Blueprint $table) {
-            $table->id();
-            $table->float('amount')->unsigned();
-            $table->timestamp('payed_at')->nullable();
-
-            // FK
+        Schema::create('order_product', function (Blueprint $table) {
             $table->bigInteger('order_id')->unsigned();
+            $table->bigInteger('product_id')->unsigned();
+            $table->integer('quantity')->unsigned();
 
-            $table->timestamps();
-            // foreign('campo_de_esta_tabla_fk')->references('indice_cruce_otra_tabla')->on('otra_tabla_cruce');
             $table->foreign('order_id')->references('id')->on('orders');
-
+            $table->foreign('product_id')->references('id')->on('products');
         });
     }
 
@@ -35,6 +31,6 @@ class CreatePaymentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('payments');
+        Schema::dropIfExists('order_product');
     }
 }
