@@ -16,7 +16,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+        'email',
+        'password',
+        'admin_since'
     ];
 
     /**
@@ -29,11 +32,16 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
+     cast => castea al tipo nativo de PHP n ode carbon
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    // Atributos que deben ser transformados como fechas usando Carbon de laravel
+    protected $dates =[
+        'payed_at'
+    ];
+
 }
