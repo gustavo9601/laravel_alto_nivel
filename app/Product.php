@@ -14,19 +14,23 @@ class Product extends Model
         'status'
     ];
 
+    // Un producto puede pertenecer a un cart o a una orden
+
 
     // Tabla pivtoe de muchos a muchos Product con Cart
     public function carts(){
         // withPivot(['column']) Se especifica los campos adicionales que debe traer de la tabla pivote
         // ya que de lo contraraio solo traeria la relacion los 2 id de las tablas a relacionar
-        return $this->belongsToMany(Cart::class)->withPivot('quantity');
+        // return $this->belongsToMany(Cart::class)->withPivot('quantity');
+        return $this->morphedByMany(Cart::class, 'productable')->withPivot('quantity'); // Muchos a nuchos, se pasa el nombre de la columna morph
     }
 
     // Tabla pivtoe de muchos a muchos Product con Orders
     public function orders(){
         // withPivot(['column']) Se especifica los campos adicionales que debe traer de la tabla pivote
         // ya que de lo contraraio solo traeria la relacion los 2 id de las tablas a relacionar
-        return $this->belongsToMany(Order::class)->withPivot('quantity');
+        // return $this->belongsToMany(Order::class)->withPivot('quantity');
+        return $this->morphedByMany(Order::class, 'productable')->withPivot('quantity');
     }
 
 
@@ -35,5 +39,6 @@ class Product extends Model
         // se le especifica el modelo clase, y el nombre del campo morph en la tabla
         return $this->morphMany(Image::class, 'imageable');
     }
+
 
 }
