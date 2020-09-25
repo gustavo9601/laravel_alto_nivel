@@ -13,7 +13,7 @@
     @else
         <div class="row">
             @foreach($products as $product)
-            <div class="col-3">
+            <div class="col-lg-3 col-md-4 col-sm-6 col-12">
                 {{--Incluyendo el archivo blade, y automaticamente recive acceso a la variable product--}}
                 {{--@include('components.product-card', ['indice' => 'valor']);  // Se puede pasar parametros manualmente   --}}
                 @include('components.product-card')

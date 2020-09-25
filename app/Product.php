@@ -41,4 +41,12 @@ class Product extends Model
     }
 
 
+
+    // Local Scope
+    // Limitando a solo retornar productos disponibles
+    // Al llamar esta funcion quedaria  Product::available();
+    public function scopeAvailable($query){
+        $query->where('status', '=', 'available');
+    }
+
 }
