@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Route;
  * */
 
 
+
 Route::get('/', 'MainController@index')->name('main');
 
 Route::get('products', 'ProductController@index')->name('products.index');
@@ -43,3 +44,7 @@ Route::delete('products/{product}', 'ProductController@destroy')->name('products
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('products.carts', 'ProductCartController')->only(['store', 'destroy', 'update']);
+
+Route::resource('carts', 'CartController')->only(['index']);

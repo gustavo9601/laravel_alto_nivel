@@ -5,6 +5,18 @@
 @section('content')
     <h1>Welcome to the Ecommerce GM</h1>
 
+    <hr>
+
+    @if(session()->has('message'))
+    <div class="row">
+        <div class="col-12">
+            <div class="alert alert-success" role="alert">
+                <h4 class="alert-heading">{{session()->get('message')}}</h4>
+            </div>
+        </div>
+    </div>
+    @endif
+
     @empty($products)
         <div class="alert alert-danger">
             No products yet !
