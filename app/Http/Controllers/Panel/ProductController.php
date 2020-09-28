@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Panel;
 
 use App\Http\Requests\ProductRequest;
+use App\Http\Controllers\Controller;
 use App\Product;
 use Illuminate\Http\Request;
 
@@ -12,8 +13,8 @@ class ProductController extends Controller
     public function __construct()
     {
         // Todas las acciones o rutas de este controlador estan protegidas pro el middleware
-        $this->middleware('auth');
-
+        // $this->middleware('auth');
+        // Ya no es necesario ya que el middleware se le coloco diretaente en la ruta
 
         /*
          * De esta forma se especifica a que funciones aplique a ciertas funciones

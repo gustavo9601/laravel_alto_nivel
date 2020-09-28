@@ -22,24 +22,7 @@ use Illuminate\Support\Facades\Route;
  * */
 
 
-
 Route::get('/', 'MainController@index')->name('main');
-
-Route::get('products', 'ProductController@index')->name('products.index');
-
-Route::get('products/create', 'ProductController@create')->name('products.create');
-
-Route::post('products', 'ProductController@store')->name('products.store');
-
-Route::get('products/{product}','ProductController@show')->name('products.show');
-// Especificando por que campo debe realizar el query en la inyeccion del modelo
-// Route::get('products/{product:title}','ProductController@show')->name('products.show');
-
-Route::get('products/{product}/edit', 'ProductController@edit')->name('products.edit');
-
-Route::match(['put', 'patch'], 'products/{product}/edit', 'ProductController@update')->name('products.update');
-
-Route::delete('products/{product}', 'ProductController@destroy')->name('products.destroy');
 
 Auth::routes();
 
