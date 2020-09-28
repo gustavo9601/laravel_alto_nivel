@@ -34,3 +34,5 @@ Route::match(['put', 'patch'], 'products/{product}/edit', 'ProductController@upd
 
 Route::delete('products/{product}', 'ProductController@destroy')->name('products.destroy');
 
+Route::get('/', 'PanelController@index')->name('panel');
+

@@ -35,7 +35,14 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
-                    <li><a class="nav-link" href="{{route('products.index')}}">Products</a></li>
+
+                    {{--
+                    optional(return value || null)->atributtes || funcions
+                    Optional permite evaluar si retorna null lo que se pase por parametro, retornara false y no accedera al siguiente atributo
+                    --}}
+                    @if (optional(auth()->user())->isAdmin())
+                        <li><a class="nav-link" href="{{route('panel')}}">Panel</a></li>
+                    @endif
 
                     {{--Al injectar una clase, permite crear una instancia de esa clase y devolverla para acceder a sus funciones o atributos--}}
                     @inject('cartService','App\Services\CartService')

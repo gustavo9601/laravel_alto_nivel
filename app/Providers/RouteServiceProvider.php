@@ -83,7 +83,8 @@ class RouteServiceProvider extends ServiceProvider
     /*Agrupacion de rutas personalizadas*/
     protected function mapPanelRoutes(){
         Route::prefix('panel')
-            ->middleware(['web', 'auth'])
+            // is.admin => CheckIfAdmin  // asi se llamo en el kernel.php
+            ->middleware(['web', 'auth', 'is.admin'])
             ->namespace("{$this->namespace}\Panel")
             ->group(base_path('routes/panel.php'));
     }
