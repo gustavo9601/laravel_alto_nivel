@@ -35,4 +35,12 @@ class Order extends Model
     }
 
 
+    // Creando un nuevo atributo temporal al modelo, para acceder desde el modelo
+    public function getTotalAttribute()
+    {
+        // Se accede a toda la funciones de las colecciones
+        return $this->products->pluck('total')->sum();
+    }
+
+
 }

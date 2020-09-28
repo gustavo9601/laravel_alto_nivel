@@ -22,6 +22,14 @@
         </div>
     @else
         <div class="row">
+            <div class="col-12">
+                <h4 class="text-center"><strong>Your Cart Total: </strong> {{$cart->total}}</h4>
+            </div>
+            <div class="col-12">
+                <a href="{{route('orders.create')}}" class="btn btn-success mb-3">Start Order</a>
+            </div>
+        </div>
+        <div class="row">
             @foreach($cart->products as $product)
                 <div class="col-lg-3 col-md-4 col-sm-6 col-12">
                     {{--Incluyendo el archivo blade, y automaticamente recive acceso a la variable product--}}

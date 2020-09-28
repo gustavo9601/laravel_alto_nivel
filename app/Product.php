@@ -49,4 +49,9 @@ class Product extends Model
         $query->where('status', '=', 'available');
     }
 
+    // Creando un nuevo atributo temporal al modelo, para acceder desde el modelo
+    public function getTotalAttribute(){
+        return $this->pivot->quantity * $this->price;
+    }
+
 }

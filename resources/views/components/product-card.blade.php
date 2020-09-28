@@ -12,6 +12,8 @@
 
         {{--Validacion que si se envia la variable cart, muestre--}}
         @if (isset($cart))
+            <p class="card-text"><strong>{{ $product->pivot->quantity  }} in your cart ({{$product->total}})</strong>
+            </p>
             <form action="{{route('products.carts.destroy', ['cart' => $cart->id, 'product' => $product->id])}}"
                   method="POST" class="d-inline">
 
