@@ -26,7 +26,7 @@ Route::get('/', 'MainController@index')->name('main');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('products.carts', 'ProductCartController')->only(['store', 'destroy', 'update']);
 
