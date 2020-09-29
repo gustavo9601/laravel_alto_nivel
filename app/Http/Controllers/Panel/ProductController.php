@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Panel;
 use App\Http\Requests\ProductRequest;
 use App\Http\Controllers\Controller;
 use App\Product;
+use App\PanelProduct;
+use App\Scopes\AvailableScope;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -29,7 +31,13 @@ class ProductController extends Controller
     {
 
         //$products = \DB::table('products')->get();
-        $products = Product::all();
+        // $products = Product::all();
+        // Indicandole que obtenga toda la lista, y descarte el filtrado que hace el global scope
+
+        //  $products = PanelProduct::all();  // Obtendiriamos el mismo resultado, ya que este modelo ignora el global scope
+        $products = Product::withOutGlobalScope(AvailableScope::class)
+            ->without('images')    // Indicandole que no tome la relacion de images en la respuesta, ya que desde el modelo se envia por default
+            ->get();
 
         return view('products.index')->with(
             ['products' => $products]
@@ -90,7 +98,7 @@ class ProductController extends Controller
         // $product = Product::create($requestValidation->all());
 
         // con ->validated()  va retornar unicamente los valores que se han validado en el form request
-        $product = Product::create($requestValidation->validated());
+        $product = PanelProduct::create($requestValidation->validated());
 
         // session()->flash('success', "The product with id {$product->id} was created");
 
@@ -106,7 +114,7 @@ class ProductController extends Controller
 
     // Product $product -> inyeccion implicta de modelos
     // Debe recibir el id y laravel de existir retorna una instancia de la clase modelo Product
-    public function show(Product $product)
+    public function show(PanelProduct $product)
     {
         // $product = \DB::table('products')->where('id', $product)->first();
         // $product = \DB::table('products')->find($product);
@@ -118,7 +126,7 @@ class ProductController extends Controller
         );
     }
 
-    public function edit(Product $product)
+    public function edit(PanelProduct $product)
     {
         // $product = Product::findOrFail($product);
         return view('products.edit')->with([
@@ -127,7 +135,7 @@ class ProductController extends Controller
     }
 
     // Usando la inyeccion de validador de los campos ProductRequest
-    public function update(ProductRequest $requestValidation, Product $product)
+    public function update(ProductRequest $requestValidation, PanelProduct $product)
     {
         // $product = Product::findOrFail($productId);
 
@@ -157,7 +165,7 @@ class ProductController extends Controller
 
     }
 
-    public function destroy(Product $product)
+    public function destroy(PanelProduct $product)
     {
         // $product = Product::findOrFail($product);
         $product->delete();
