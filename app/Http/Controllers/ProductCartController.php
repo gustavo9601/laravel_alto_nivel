@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Cart;
 use App\Product;
 use App\Services\CartService;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Cookie;
@@ -40,6 +41,16 @@ class ProductCartController extends Controller
                 ->find($product->id) // Filtra el carrito si tine en la lista de products el id pasado por parametro
                 ->pivot   // Consulta en la tabla pivote
                 ->quantity ?? 0;  // Si retorna null devuelve un 0 en acso contrario devuelve el valor encontrado
+
+
+
+        // Validacion de stock, para no vender agotados
+        if ($product->stock < $quantity + 1){
+            // Disparando la exepcicion , y enviamos un mensaje en dado caso ocurra un error
+            throw ValidationException::withMessages([
+                'product'=> 'There is not enough stock for the quntity you required of' . $product->title
+            ]);
+        }
 
 
         // Añade al carrito y asocia el id del producto enviado , adicinal de pasarle el quantity

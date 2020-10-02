@@ -6,6 +6,7 @@ use App\Order;
 use Illuminate\Http\Request;
 
 use App\Services\CartService;
+use Illuminate\Validation\ValidationException;
 
 class OrderController extends Controller
 {
@@ -88,8 +89,24 @@ class OrderController extends Controller
             // map => array nuevo con indices nuevos
             $cartProductsWithQuantity = $cart->products
                 ->mapWithKeys(function ($product) {
+
+                    $quantity = $product->pivot->quantity;
+
+                    // Validacion de stock, para no vender agotados
+                    if ($product->stock < $quantity){
+                        // Disparando la exepcicion , y enviamos un mensaje en dado caso ocurra un error
+                        throw ValidationException::withMessages([
+                            'product'=> 'There is not enough stock for the quntity you required of' . $product->title
+                        ]);
+                    }
+
+
+                    // descontando del stock la cantidad de uniddes agregadas a la orden
+                    // modelo->decrement(atributo, valor_a_decrementar)
+                    $product->decrement('stock', $quantity);
                     // De esta forma se genera el nuevo array usando como indice, el id de cada producto
-                    $element[$product->id] = ['quantity' => $product->pivot->quantity];
+                    $element[$product->id] = ['quantity' => $quantity];
+
                     return $element;
                 });
 

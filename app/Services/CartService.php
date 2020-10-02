@@ -9,10 +9,13 @@ class CartService
 {
 
     protected $cookieName;
+    protected $cookieTimeExpiration;
 
     public function __construct()
     {
-        $this->cookieName = 'cart';
+        // Asignando valores desde nuestro arhivo de configuracion personalizado
+        $this->cookieName = config('cart.cookie.name');
+        $this->cookieTimeExpiration = config('cart.cookie.time_expiration');;
     }
 
     public function getFormmCookie()
